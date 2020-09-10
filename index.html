@@ -1,11 +1,62 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/uikit@3.5.7/dist/css/uikit.min.css" />
+    <script src="https://cdn.jsdelivr.net/npm/uikit@3.5.7/dist/js/uikit.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/uikit@3.5.7/dist/js/uikit-icons.min.js"></script>
+    <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/open-iconic/1.1.1/font/css/open-iconic-bootstrap.min.css" />
+    <link rel="stylesheet" href="./assets/css/style.css">
+    <title>Space-Time Researcher</title>
 </head>
+
 <body>
-    
+    <Header>
+        <h1 class="custom-header-text">Space-Time Researcher</h1>
+        <button class="uk-button btn-custom btn-padding">Random Search</button>
+        <form>
+            <input class="input-custom" type="text" id="searchTerm" placeholder="Specified Search">
+            <button class="uk-button btn-custom" type="submit" name="action"><span
+                    class="oi oi-magnifying-glass"></span></button>
+        </form>
+    </Header>
+    <section class="hero">
+        <div class="uk-card uk-card-small uk-card-default card-custom  custom-card-body-hero">
+            <div class="uk-card-header card-custom-header uk-text-center">
+                <h3 id="custom-card-title">Welcome to Space-Time Researcher</h3>
+            </div>
+            <div class="uk-card-body">
+                You can use this website to search for, or randomly find astronomy articles and picture libraries.
+                In addition, you can refer back to previous searches via a saved search bar.
+            </div>
+        </div>
+    </section>
+    <main>
+        <div class="uk-container uk-container-center container-height">
+            <div class="uk-grid">
+                <div class="uk-width-1-2">
+                    <div class="content-margins">
+                    <img src="./assets/images/MilkyWayGalaxy.jpg" alt="space picture" />
+                    </div>
+                </div>
+                <div class="uk-width-1-2">
+                    <div class="uk-card uk-card-small uk-card-default custom-card-body-main content-margins">
+                        <div class="uk-card-header card-custom-header uk-text-center">
+                            <h3 id="custom-card-title">Milky Way Galaxy</h3>
+                        </div>
+                        <div class="uk-card-body card-body-height">
+                            Lorem ipsum dolor sit amet consectetur adipisicing elit. Deserunt alias magni perferendis
+                            molestiae illum vel, mollitia odio, natus rerum error sequi distinctio ea recusandae placeat
+                            pariatur facere optio quos velit!
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
 </body>
+
 </html>
