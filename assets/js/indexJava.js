@@ -59,10 +59,6 @@
         })
     }
 
-    $( "#search" ).click(function(event) {
-        event.preventDefault()
-        myFunction()
-    })
 // })
 
 // Make request to REST.api using search term
@@ -100,4 +96,5 @@ var articleSearch = function() {
 $( "#search" ).click(function(event) {
     event.preventDefault()
     articleSearch()
+    myFunction()
 })
