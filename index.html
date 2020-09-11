@@ -14,12 +14,13 @@
 </head>
 
 <body>
-    <Header>
+    <Header id="apod-container">
         <h1 class="custom-header-text">Space-Time Researcher</h1>
         <button class="uk-button btn-custom btn-padding">Random Search</button>
         <form>
             <input class="input-custom" type="text" id="searchTerm" placeholder="Specified Search">
-            <button class="uk-button btn-custom" type="submit" name="action"><span
+            <!-- <button id="search" class="uk-button btn-custom" type="submit" name="action">Search</button> -->
+            <button id="search" class="uk-button btn-custom" type="submit" name="action"><span
                     class="oi oi-magnifying-glass"></span></button>
         </form>
     </Header>
@@ -38,7 +39,7 @@
         <div class="uk-container uk-container-center container-height">
             <div class="uk-grid">
                 <div class="uk-width-1-2">
-                    <div class="content-margins">
+                    <div id="response-img-container" class="content-margins">
                     <img src="./assets/images/MilkyWayGalaxy.jpg" alt="space picture" />
                     </div>
                 </div>
@@ -57,6 +58,10 @@
             </div>
         </div>
     </main>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.27.0/moment.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="assets/js/indexJava.js"></script>
 </body>
 
 </html>
