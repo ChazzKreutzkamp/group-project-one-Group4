@@ -1,0 +1,95 @@
+:root {
+    --primary-color: #2C3531;
+    --secondary-color: #116466;
+    --tertiary-color: #D9B08C;
+    --forth-color: #FFCB9A;
+    --fifth-color: #D1E8E2;
+}
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+body {
+    background-color: var(--primary-color);
+}
+header {
+    padding: 20px 35px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    top: 0;
+    background-color: var(--secondary-color);
+}
+.hero {
+    background-image: url(../images/MilkyWayGalaxy.jpg);
+    background-size: cover;
+    background-position: center;
+    height: 405px;
+    display: flex;
+}
+
+.custom-hero-bg {
+    background-color: var(--secondary-color);
+    color: var(--forth-color);
+}
+.custom-header-text {
+    color: var(--tertiary-color);
+    font-family: 'Times New Roman', Times, serif;
+}
+.btn-custom {
+    background-color: var(--primary-color);
+    color: var(--fifth-color);
+}
+.btn-padding {
+    padding-left: 100px;
+    padding-right: 100px;
+}
+.input-custom {
+    padding-top: 10px;
+    padding-bottom: 10px;
+    padding-right: 150px;
+    padding-left: 150px;
+    background-color: var(--primary-color);
+    color: var(--fifth-color);
+}
+.card-custom-header {
+    background-color: var(--secondary-color);
+}
+.card-custom {
+    width: 25%;
+    margin: 20px;
+    margin-left: 70px;
+    opacity: 90%;
+}
+.custom-card-body-hero {
+    background-color: var(--primary-color);
+    color: var(--fifth-color);
+}
+#custom-card-title {
+    color: var(--forth-color);
+}
+.custom-content-bg {
+    background-color: var(--primary-color);
+}
+.column-bg {
+    background-color: var(--secondary-color);
+}
+img {
+    height: 500px;
+    width: 500px;
+}
+.custom-card-body-main {
+    background-color: var(--tertiary-color);
+    color: black;
+}
+.container-height {
+    height: 600px;
+}
+.card-body-height {
+    height: 440px;
+}
+.content-margins {
+    margin-top: 50px;
+}
