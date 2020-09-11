@@ -79,12 +79,22 @@ var articleSearch = function() {
           console.log(data.extract);
           // Create a variable that will select the <div> where the article will be displayed
           var articleContainerEl = document.querySelector('#article-response-container');
-          // empty out div before we append it
+          // Create a variable that will select the <div> where the article TITLE will be displayed
+          var articleTitleEl = document.querySelector('#article-title');
+
+          // empty out both divs before we append them
           articleContainerEl.innerHTML = '';
+          articleTitleEl.innerHTML = '';
 
           var searchArticle = document.createElement('article');
+          var articleTitle = document.createElement('h3');
+          articleTitle.setAttribute('id', 'custom-card-title');
+
           searchArticle.innerHTML = (data.extract);
+          articleTitle.innerHTML = (data.displaytitle);
+
           articleContainerEl.appendChild(searchArticle);
+          articleTitleEl.appendChild(articleTitle);
         });
 }
 $( "#search" ).click(function(event) {
