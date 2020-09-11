@@ -64,3 +64,30 @@
         myFunction()
     })
 // })
+
+// Make request to REST.api using search term
+var articleSearch = function() {
+    var searchTerm = document.querySelector('#searchTerm').value;
+
+    fetch(
+        'https://en.wikipedia.org/api/rest_v1/page/summary/'
+        + searchTerm)
+        .then(function(response) {
+          return response.json();
+        })
+        .then(function(data) {
+          console.log(data.extract);
+          // Create a variable that will select the <div> where the article will be displayed
+          var articleContainerEl = document.querySelector('#article-response-container');
+          // empty out div before we append it
+          articleContainerEl.innerHTML = '';
+
+          var searchArticle = document.createElement('article');
+          searchArticle.innerHTML = (data.extract);
+          articleContainerEl.appendChild(searchArticle);
+        });
+}
+$( "#search" ).click(function(event) {
+    event.preventDefault()
+    articleSearch()
+})
