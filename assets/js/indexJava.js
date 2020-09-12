@@ -191,7 +191,7 @@ let astronomyGlossary = [
 
 let apiKey = "j0LPAYTqCSdP1vTw9ZZCpA4Gtxf6Z0DGEnk2x0lc"
 
-function myFunction() {
+function imgSearch() {
     var searchTerm = document.querySelector('#searchTerm').value;
     
     fetch(
@@ -203,21 +203,14 @@ function myFunction() {
         // console.log(response)
         return response.json();
     })
-    .then(function(data) {
-        console.log(data)
-        console.log(data.collection.items[0].links[0].href);
-
-        // Create a variable that will select the <div> where the GIF will be displayed
-        var responseImgContainerEl = document.querySelector('#response-img-container');
-    
-        // Empty out the <div> before we append a GIF to it
-        responseImgContainerEl.innerHTML = '';
-    
-        var searchImg = document.createElement('img');
-        searchImg.setAttribute('src', data.collection.items[0].links[0].href);
-    
-        // Append 'searchImg' to the <div>
-        responseImgContainerEl.appendChild(searchImg);
+    .then(function(data) {    
+        if (data.collection.items.length==0){
+            console.log("there is no image")
+            $('#response-img').attr('src', "https://www.brdtex.com/wp-content/uploads/2019/09/no-image.png")
+        }
+        else {
+            $('#response-img').attr('src', data.collection.items[0].links[0].href)
+        }
     })
 }
 
@@ -252,7 +245,6 @@ function apodHero() {
 // Make request to REST.api using search term
 var articleSearch = function() {
     var searchTerm = document.querySelector('#searchTerm').value;
-
     fetch(
         'https://en.wikipedia.org/api/rest_v1/page/summary/'
         + searchTerm)
@@ -265,19 +257,6 @@ var articleSearch = function() {
           var articleContainerEl = document.querySelector('#article-response-container');
           // Create a variable that will select the <div> where the article TITLE will be displayed
           var articleTitleEl = document.querySelector('#article-title');
-        })
-    }
-
-    function apodHero() {
-        //load Astronomy Picture of the Day
-        fetch("https://api.nasa.gov/planetary/apod?" + 
-        "api_key=" + apiKey +
-        "&date=" + moment().format("YYYY[-]MM[-]DD")
-        )
-        .then(function(response){
-            return response.json()
-        
-        })
           // empty out both divs before we append them
           articleContainerEl.innerHTML = '';
           articleTitleEl.innerHTML = '';
@@ -286,7 +265,7 @@ var articleSearch = function() {
           var articleTitle = document.createElement('h3');
           var articleLink = document.createElement('a');
 
-          articleTitle.setAttribute('id', 'custom-card-title');
+          articleTitle.setAttribute('id', 'article-card-title');
           articleLink.setAttribute('href', "https://en.wikipedia.org/wiki/" + searchTerm);
 
           searchArticle.innerHTML = (data.extract);
@@ -296,8 +275,57 @@ var articleSearch = function() {
           articleContainerEl.appendChild(searchArticle);
           articleTitleEl.appendChild(articleTitle);
           articleContainerEl.appendChild(articleLink);
+        
         });
 };
+
+function randomSearch() {
+    var randomArticle = astronomyGlossary[Math.floor(Math.random()*astronomyGlossary.length)]
+    var randomSearch = randomArticle.name
+    
+
+    fetch(
+        "https://images-api.nasa.gov/search?q=" +
+        randomSearch 
+        // + "&api_key=" + apiKey
+        )
+        .then(function(response) {
+            return response.json();
+        })
+        .then(function(data) {    
+            if (data.collection.items.length==0){
+                $('#response-img').attr('src', "https://www.brdtex.com/wp-content/uploads/2019/09/no-image.png")
+            }
+            else {
+                $('#response-img').attr('src', data.collection.items[0].links[0].href)
+            }
+        })
+    
+    fetch(
+        'https://en.wikipedia.org/api/rest_v1/page/summary/'
+        + randomSearch)
+        .then(function(response) {
+          return response.json();
+        })
+        .then(function(response) {
+            if (!response.extract){
+                $('#article-response-container').text(randomArticle.definition)
+                $('#article-card-title').text(randomSearch);
+            }
+            else {
+                var readMoreLink = $("<a>")
+                readMoreLink.attr('href', "https://en.wikipedia.org/wiki/" + randomSearch)
+                readMoreLink.attr('target', 'blank_')
+                readMoreLink.text("Read more...")
+                $('#article-card-title').text(randomSearch);
+                $('#article-response-container').text(response.extract + "\n ")
+                $('#article-response-container').append("<br>")
+                $('#article-response-container').append(readMoreLink);
+            }
+        })
+
+}
+        
 
     $( "#random" ).click(function(event) {
         event.preventDefault()
@@ -307,6 +335,6 @@ var articleSearch = function() {
     $( "#search" ).click(function(event) {
         event.preventDefault()
         articleSearch()
-        myFunction()
+        imgSearch()
     })
 
