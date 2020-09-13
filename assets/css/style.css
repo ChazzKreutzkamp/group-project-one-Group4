@@ -70,6 +70,14 @@ header {
 #custom-card-title {
     color: var(--forth-color);
 }
+
+#article-card-title {
+    color: var(--forth-color);
+}
+
+#searchVideo {
+    margin: 50px 50px 50px 150px;
+}
 .custom-content-bg {
     background-color: var(--primary-color);
 }
