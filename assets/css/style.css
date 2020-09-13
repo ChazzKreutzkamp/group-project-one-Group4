@@ -75,9 +75,6 @@ header {
     color: var(--forth-color);
 }
 
-#searchVideo {
-    margin: 50px 50px 50px 150px;
-}
 .custom-content-bg {
     background-color: var(--primary-color);
 }
@@ -99,6 +96,20 @@ img {
 .content-margins {
     margin-top: 50px;
 }
+
+#video {
+    display:flex;
+    justify-content: center;
+    height: 500px;
+}
+
+#searchVideo {
+    /* margin: auto; */
+    width: 70%;
+    height: 85%;
+}
+
+
 @media screen and (max-width: 1360px) {
 .custom-header-text {
     text-align: center;
