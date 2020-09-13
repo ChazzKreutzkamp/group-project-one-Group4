@@ -218,7 +218,6 @@ function imgSearch() {
         })
         .then(function(data) {
             $('#searchVideo').attr('src', "https://www.youtube.com/embed/" + data.items[0].id.videoId + "?rel=0")
-            // }
         })
     })
 }
@@ -244,7 +243,17 @@ function apodHero() {
             $('#article-card-title').text(data.title);
             $('#article-response-container').text(data.explanation)
         }
+        return fetch("https://www.googleapis.com/youtube/v3/search?part=snippet&maxResults=25&q=astronomy,"
+        + data.title + "&safeSearch=strict&type=video&key=AIzaSyC4l0SPzjcjo45C_AnFV8_ZxmqCIwjzBUg")
+        .then(function(response) {
+            return response.json();
+        })
+        .then(function(data) {
+            $('#searchVideo').attr('src', "https://www.youtube.com/embed/" + data.items[0].id.videoId + "?rel=0")
+        })
+    
     })
+    
 }
 
 // Make request to REST.api using search term
@@ -296,7 +305,8 @@ function randomSearch() {
         .then(function(response) {
             return response.json();
         })
-        .then(function(data) {    
+        .then(function(data) {  
+            console.log(data)  
             if (data.collection.items.length==0){
                 $('#response-img').attr('src', "https://www.brdtex.com/wp-content/uploads/2019/09/no-image.png")
             }
