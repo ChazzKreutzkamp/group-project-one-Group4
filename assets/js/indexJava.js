@@ -217,7 +217,7 @@ function imgSearch() {
             return response.json();
         })
         .then(function(data) {
-            $('#searchVideo').attr('src', "https://www.youtube.com/embed/" + sdata.items[0].id.videoId + "?rel=0")
+            $('#searchVideo').attr('src', "https://www.youtube.com/embed/" + data.items[0].id.videoId + "?rel=0")
             // }
         })
     })
