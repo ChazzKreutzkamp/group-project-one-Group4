@@ -200,17 +200,25 @@ function imgSearch() {
         // + "&api_key=" + apiKey
     )
     .then(function(response) {
-        // console.log(response)
         return response.json();
     })
     .then(function(data) {    
         if (data.collection.items.length==0){
-            console.log("there is no image")
             $('#response-img').attr('src', "https://www.brdtex.com/wp-content/uploads/2019/09/no-image.png")
         }
         else {
             $('#response-img').attr('src', data.collection.items[0].links[0].href)
         }
+    })
+    .then(function(){
+        fetch("https://www.googleapis.com/youtube/v3/search?part=snippet&maxResults=25&q=astronomy,"
+        + searchTerm + "&safeSearch=strict&type=video&key=AIzaSyC4l0SPzjcjo45C_AnFV8_ZxmqCIwjzBUg")
+        .then(function(response) {
+            return response.json();
+        })
+        .then(function(data) {
+            $('#searchVideo').attr('src', "https://www.youtube.com/embed/" + data.items[0].id.videoId + "?rel=0")
+        })
     })
 }
 
@@ -222,25 +230,31 @@ function apodHero() {
     )
     .then(function(response){
         return response.json()
+    })
+    .then(function(data) {    
+        if (data.media_type=="image"){
+
+            console.log(data.media_type);
+            $('#response-img').attr('src', data.url)
+            $('#article-card-title').text(data.title);
+            $('#article-response-container').text(data.explanation)
+        }
+        else{
+            $('#article-card-title').text(data.title);
+            $('#article-response-container').text(data.explanation)
+        }
+        return fetch("https://www.googleapis.com/youtube/v3/search?part=snippet&maxResults=25&q=astronomy,"
+        + data.title + "&safeSearch=strict&type=video&key=AIzaSyC4l0SPzjcjo45C_AnFV8_ZxmqCIwjzBUg")
+        .then(function(response) {
+            return response.json();
+        })
+        .then(function(data) {
+            $('#searchVideo').attr('src', "https://www.youtube.com/embed/" + data.items[0].id.videoId + "?rel=0")
+        })
     
     })
-
-    .then(function(data) {
-        console.log(data.url);
-        var apodEl = document.querySelector('#apod-container');
-
-        // Empty out the <div> before we append a GIF to it
-        apodEl.innerHTML = '';
-
-        var apodImg = document.createElement('img');
-        apodImg.setAttribute('src', data.url);
-
-        // Append 'gifImg' to the <div>
-        apodEl.appendChild(apodImg);
-    })
+    
 }
-
-
 
 // Make request to REST.api using search term
 var articleSearch = function() {
@@ -252,7 +266,6 @@ var articleSearch = function() {
           return response.json();
         })
         .then(function(data) {
-          console.log(data.extract);
           // Create a variable that will select the <div> where the article will be displayed
           var articleContainerEl = document.querySelector('#article-response-container');
           // Create a variable that will select the <div> where the article TITLE will be displayed
@@ -292,12 +305,13 @@ function randomSearch() {
         .then(function(response) {
             return response.json();
         })
-        .then(function(data) {    
+        .then(function(data) {  
+            console.log(data)  
             if (data.collection.items.length==0){
                 $('#response-img').attr('src', "https://www.brdtex.com/wp-content/uploads/2019/09/no-image.png")
             }
             else {
-                $('#response-img').attr('src', data.collection.items[0].links[0].href)
+                $('#response-img').attr('src', data.collection.items[0].links[0].href + "?rel=0")
             }
         })
     
@@ -323,7 +337,17 @@ function randomSearch() {
                 $('#article-response-container').append(readMoreLink);
             }
         })
-
+        .then(function(){
+            fetch("https://www.googleapis.com/youtube/v3/search?part=snippet&maxResults=25&q=astronomy,"
+            + randomSearch + "&key=AIzaSyC4l0SPzjcjo45C_AnFV8_ZxmqCIwjzBUg")
+            .then(function(response) {
+                return response.json();
+            })
+            .then(function(data) {                 
+                $('#searchVideo').attr('src', "https://www.youtube.com/embed/" + data.items[0].id.videoId)
+                // }
+            })
+        })
 }
         
 
@@ -338,3 +362,4 @@ function randomSearch() {
         imgSearch()
     })
 
+    apodHero();
