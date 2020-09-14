@@ -190,6 +190,7 @@ let astronomyGlossary = [
 ]
 var storageList = [];
 let apiKey = "j0LPAYTqCSdP1vTw9ZZCpA4Gtxf6Z0DGEnk2x0lc"
+var isRandomSearch = false;
 
 function initialize() {
     //load Astronomy Picture of the Day
@@ -208,27 +209,21 @@ function initialize() {
                 $('#response-img').attr('src', data.url)
                 $('#article-card-title').text(data.title);
                 $('#article-response-container').text(data.explanation)
+                videoUpdate(data.tilte);
             }
             else {
                 $('#article-card-title').text(data.title);
                 $('#article-response-container').text(data.explanation)
             }
-            return fetch("https://www.googleapis.com/youtube/v3/search?part=snippet&maxResults=25&q=astronomy,"
-                + data.title + "&safeSearch=strict&type=video&key=AIzaSyC4l0SPzjcjo45C_AnFV8_ZxmqCIwjzBUg")
-                .then(function (response) {
-                    return response.json();
-                })
-                .then(function (data) {
-                    $('#searchVideo').attr('src', "https://www.youtube.com/embed/" + data.items[0].id.videoId + "?rel=0")
-                })
-
         })
 
 }
-function randomSearch() {
+function random() {
     var randomArticle = astronomyGlossary[Math.floor(Math.random() * astronomyGlossary.length)]
     var randomSearch = randomArticle.name
+    isRandomSearch = true;
     imgUpdate(randomSearch);
+    randomArticleUpdate(randomSearch, randomArticle);
 }
 function imgUpdate(searchTerm) {
     fetch(
@@ -247,9 +242,38 @@ function imgUpdate(searchTerm) {
                 $('#response-img').attr('src', data.collection.items[0].links[0].href)
             }
         })
-        articleUpdate(searchTerm);
+        if (isRandomSearch) {
+        } else {
+            articleUpdate(searchTerm);
+        }
+}
+var randomArticleUpdate = function(randomSearch, randomArticle) {
+    fetch(
+        'https://en.wikipedia.org/api/rest_v1/page/summary/'
+        + randomSearch)
+        .then(function(response) {
+          return response.json();
+        })
+        .then(function(response) {
+            if (!response.extract){
+                $('#article-response-container').text(randomArticle.definition)
+                $('#article-card-title').text(randomSearch);
+            }
+            else {
+                var readMoreLink = $("<a>")
+                readMoreLink.attr('href', "https://en.wikipedia.org/wiki/" + randomSearch)
+                readMoreLink.attr('target', 'blank_')
+                readMoreLink.text("Read more...")
+                $('#article-card-title').text(randomSearch);
+                $('#article-response-container').text(response.extract + "\n ")
+                $('#article-response-container').append("<br>")
+                $('#article-response-container').append(readMoreLink);
+            }
+        });
+        videoUpdate(searchTerm);
 }
 var articleUpdate = function (searchTerm) {
+    var videoSearchTerm;
     fetch(
         'https://en.wikipedia.org/api/rest_v1/page/summary/'
         + searchTerm)
@@ -290,13 +314,14 @@ var videoUpdate = function (searchTerm) {
                 return response.json();
             })
             .then(function (data) {
+                console.log(data);
                 $('#searchVideo').attr('src', "https://www.youtube.com/embed/" + data.items[0].id.videoId + "?rel=0")
             })
 }
 
 $("#random").click(function (event) {
     event.preventDefault()
-    randomSearch()
+    random()
 })
 
 $("#search").click(function (event) {
