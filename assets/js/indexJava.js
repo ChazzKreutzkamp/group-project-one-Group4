@@ -310,7 +310,7 @@ var articleUpdate = function (searchTerm) {
 }
 var videoUpdate = function (searchTerm) {
         fetch("https://www.googleapis.com/youtube/v3/search?part=snippet&maxResults=25&q=astronomy,"
-            + searchTerm + "&safeSearch=strict&type=video&key=AIzaSyC4l0SPzjcjo45C_AnFV8_ZxmqCIwjzBUg")
+            + searchTerm + "&safeSearch=strict&type=video&key=AIzaSyBIuGiZqeThcZGfwsmoWVKhV0XwJ7NgLO4")
             .then(function (response) {
                 return response.json();
             })
