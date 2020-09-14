@@ -271,7 +271,7 @@ var randomArticleUpdate = function(randomSearch, randomArticle) {
                 $('#article-response-container').append(readMoreLink);
             }
         });
-        videoUpdate(searchTerm);
+        videoUpdate(randomSearch);
 }
 var articleUpdate = function (searchTerm) {
     var videoSearchTerm;
