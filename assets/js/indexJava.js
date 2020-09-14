@@ -201,19 +201,19 @@ function initialize() {
         .then(function (response) {
             return response.json()
         })
-        .then(function (data) {
-            console.log(data);
+                .then(function (data) {
             if (data.media_type == "image") {
-
-                console.log(data.media_type);
                 $('#response-img').attr('src', data.url)
                 $('#article-card-title').text(data.title);
                 $('#article-response-container').text(data.explanation)
-                videoUpdate(data.tilte);
+                var searchTerm = data.title;
+                videoUpdate(searchTerm);
             }
             else {
                 $('#article-card-title').text(data.title);
                 $('#article-response-container').text(data.explanation)
+                var searchTerm = data.title;
+                videoUpdate(searchTerm);
             }
         })
 
