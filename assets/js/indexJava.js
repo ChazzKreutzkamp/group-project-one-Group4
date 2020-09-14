@@ -271,7 +271,7 @@ var randomArticleUpdate = function(randomSearch, randomArticle) {
                 $('#article-response-container').append(readMoreLink);
             }
         });
-        videoUpdate(randomSearch);
+        videoUpdate(searchTerm);
 }
 var articleUpdate = function (searchTerm) {
     var videoSearchTerm;
@@ -309,6 +309,7 @@ var articleUpdate = function (searchTerm) {
         videoUpdate(searchTerm);
 }
 var videoUpdate = function (searchTerm) {
+    console.log(searchTerm)
         fetch("https://www.googleapis.com/youtube/v3/search?part=snippet&maxResults=25&q=astronomy,"
             + searchTerm + "&safeSearch=strict&type=video&key=AIzaSyBIuGiZqeThcZGfwsmoWVKhV0XwJ7NgLO4")
             .then(function (response) {
