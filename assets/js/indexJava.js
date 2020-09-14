@@ -224,6 +224,7 @@ function random() {
     isRandomSearch = true;
     imgUpdate(randomSearch);
     randomArticleUpdate(randomSearch, randomArticle);
+    isRandomSearch = false;
 }
 function imgUpdate(searchTerm) {
     fetch(
