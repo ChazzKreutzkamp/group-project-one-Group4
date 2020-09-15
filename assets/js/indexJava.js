@@ -273,7 +273,7 @@ var randomArticleUpdate = function(randomSearch, randomArticle) {
             else {
                 var readMoreLink = $("<a>")
                 readMoreLink.attr('href', "https://en.wikipedia.org/wiki/" + randomSearch)
-                readMoreLink.attr('target', 'blank_')
+                readMoreLink.attr('target', '_blank')
                 readMoreLink.text("Read more...")
                 $('#article-card-title').text(randomSearch);
                 $('#article-response-container').text(response.extract + "\n ")
@@ -316,6 +316,7 @@ var articleUpdate = function (searchTerm) {
             searchArticle.innerHTML = (data.extract);
             articleTitle.innerHTML = (data.displaytitle);
             articleLink.innerHTML = ("Read more...");
+            articleLink.setAttribute('target', '_blank');
 
             articleContainerEl.appendChild(searchArticle);
             articleTitleEl.appendChild(articleTitle);
