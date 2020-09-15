@@ -29,7 +29,6 @@ header {
     height: 405px;
     display: flex;
 }
-
 .custom-hero-bg {
     background-color: var(--secondary-color);
     color: var(--forth-color);
@@ -70,6 +69,11 @@ header {
 #custom-card-title {
     color: var(--forth-color);
 }
+
+#article-card-title {
+    color: var(--forth-color);
+}
+
 .custom-content-bg {
     background-color: var(--primary-color);
 }
@@ -91,6 +95,20 @@ img {
 .content-margins {
     margin-top: 50px;
 }
+
+#video {
+    display:flex;
+    justify-content: center;
+    height: 500px;
+}
+
+#searchVideo {
+    /* margin: auto; */
+    width: 70%;
+    height: 85%;
+}
+
+
 @media screen and (max-width: 1360px) {
 .custom-header-text {
     text-align: center;
