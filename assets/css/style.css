@@ -29,7 +29,6 @@ header {
     height: 405px;
     display: flex;
 }
-
 .custom-hero-bg {
     background-color: var(--secondary-color);
     color: var(--forth-color);

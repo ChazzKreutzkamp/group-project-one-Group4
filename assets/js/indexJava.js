@@ -191,8 +191,11 @@ let astronomyGlossary = [
 var storageList = [];
 let apiKey = "j0LPAYTqCSdP1vTw9ZZCpA4Gtxf6Z0DGEnk2x0lc"
 var isRandomSearch = false;
+var isListInitialized = false;
+var isListSearch = false;
 
 function initialize() {
+    storageList = JSON.parse(localStorage.getItem("storageList"));
     //load Astronomy Picture of the Day
     fetch("https://api.nasa.gov/planetary/apod?" +
         "api_key=" + apiKey +
@@ -216,7 +219,14 @@ function initialize() {
                 videoUpdate(searchTerm);
             }
         })
-
+    if (storageList) {
+        initializeList();
+        isListInitialized = true;
+        createListElements();
+    }
+    else {
+        storageList = [];
+    }
 }
 function random() {
     var randomArticle = astronomyGlossary[Math.floor(Math.random() * astronomyGlossary.length)]
@@ -270,11 +280,17 @@ var randomArticleUpdate = function(randomSearch, randomArticle) {
                 $('#article-response-container').append("<br>")
                 $('#article-response-container').append(readMoreLink);
             }
+            if (isListInitialized === false) {
+                initializeList();
+                isListInitialized = true;
+            }
+            if (isListSearch === false){
+            listHandler(randomArticle.name);
+            }
         });
         videoUpdate(randomSearch);
 }
 var articleUpdate = function (searchTerm) {
-    var videoSearchTerm;
     fetch(
         'https://en.wikipedia.org/api/rest_v1/page/summary/'
         + searchTerm)
@@ -305,20 +321,48 @@ var articleUpdate = function (searchTerm) {
             articleTitleEl.appendChild(articleTitle);
             articleContainerEl.appendChild(articleLink);
 
+            if (isListInitialized === false) {
+                initializeList();
+                isListInitialized = true;
+            }
+            if (isListSearch === false){
+            listHandler(data.displaytitle);
+            }
         });
         videoUpdate(searchTerm);
 }
+var listHandler = function (searchTerm) {
+    storageList.unshift(searchTerm);
+    if (storageList.length >= 9) {
+        storageList.pop();
+    }
+    localStorage.setItem("storageList", JSON.stringify(storageList));
+    createListElements();
+}
+var createListElements = function () {
+    var uListEl = document.querySelector("#list-group");
+    uListEl.innerHTML = "";
+    for (var i = 0; i < storageList.length; i++) {
+        var newListEl = document.createElement("li");
+        newListEl.textContent = storageList[i];
+        uListEl.appendChild(newListEl);
+    }
+}
 var videoUpdate = function (searchTerm) {
-    console.log(searchTerm)
         fetch("https://www.googleapis.com/youtube/v3/search?part=snippet&maxResults=25&q=astronomy,"
             + searchTerm + "&safeSearch=strict&type=video&key=AIzaSyBIuGiZqeThcZGfwsmoWVKhV0XwJ7NgLO4")
             .then(function (response) {
                 return response.json();
             })
             .then(function (data) {
-                console.log(data);
                 $('#searchVideo').attr('src', "https://www.youtube.com/embed/" + data.items[0].id.videoId + "?rel=0")
             })
+}
+var initializeList = function() {
+    var cardTitleEl = document.querySelector("#custom-card-title");
+    var cardParagraphEl = document.querySelector("#card-body-initial-text");
+    cardTitleEl.textContent = "Click a Past Search";
+    cardParagraphEl.textContent="";
 }
 
 $("#random").click(function (event) {
@@ -331,5 +375,15 @@ $("#search").click(function (event) {
     var searchTerm = document.querySelector('#searchTerm').value;
     imgUpdate(searchTerm);
 })
+
+$(".list-group").on("click", "li", function () {
+    var searchTerm = $(this)
+      .text()
+      .trim();
+    isListSearch = true;
+    imgUpdate(searchTerm);
+    isListSearch = false;
+  });
+
 
 initialize();
