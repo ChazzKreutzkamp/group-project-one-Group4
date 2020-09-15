@@ -333,8 +333,7 @@ var articleUpdate = function (searchTerm) {
 }
 var listHandler = function (searchTerm) {
     storageList.unshift(searchTerm);
-    console.log(storageList);
-    if (storageList.length >= 8) {
+    if (storageList.length >= 9) {
         storageList.pop();
     }
     localStorage.setItem("storageList", JSON.stringify(storageList));
@@ -356,7 +355,6 @@ var videoUpdate = function (searchTerm) {
                 return response.json();
             })
             .then(function (data) {
-                console.log(data);
                 $('#searchVideo').attr('src', "https://www.youtube.com/embed/" + data.items[0].id.videoId + "?rel=0")
             })
 }
