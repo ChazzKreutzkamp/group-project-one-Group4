@@ -192,7 +192,6 @@ var storageList = [];
 let apiKey = "j0LPAYTqCSdP1vTw9ZZCpA4Gtxf6Z0DGEnk2x0lc"
 var isRandomSearch = false;
 var isListInitialized = false;
-var isListSearch = false;
 
 function initialize() {
     storageList = JSON.parse(localStorage.getItem("storageList"));
@@ -284,10 +283,7 @@ var randomArticleUpdate = function(randomSearch, randomArticle) {
                 initializeList();
                 isListInitialized = true;
             }
-            if (isListSearch === false){
             listHandler(randomArticle.name);
-            isListSearch = false;
-            }
         });
         videoUpdate(randomSearch);
 }
@@ -327,10 +323,7 @@ var articleUpdate = function (searchTerm) {
                 initializeList();
                 isListInitialized = true;
             }
-            if (isListSearch === false){
             listHandler(data.displaytitle);
-            isListSearch = false;
-            }
         });
         videoUpdate(searchTerm);
 }
@@ -350,6 +343,105 @@ var createListElements = function () {
         newListEl.textContent = storageList[i];
         uListEl.appendChild(newListEl);
     }
+}
+var listSearch = function (searchTerm) {
+    var index;
+    for (var i = 0; i < astronomyGlossary.length; i++) {
+        console.log(searchTerm);
+        console.log(astronomyGlossary[i].name);
+        if(searchTerm === astronomyGlossary[i].name) {
+            index = i;
+            break;
+        } else {
+            index = null;
+        }
+    }
+
+    //image search
+
+    fetch(
+        "https://images-api.nasa.gov/search?q=" +
+        searchTerm
+        // + "&api_key=" + apiKey
+    )
+        .then(function (response) {
+            return response.json();
+        })
+        .then(function (data) {
+            if (data.collection.items.length == 0) {
+                $('#response-img').attr('src', "https://www.brdtex.com/wp-content/uploads/2019/09/no-image.png")
+            }
+            else {
+                $('#response-img').attr('src', data.collection.items[0].links[0].href)
+            }
+        })
+    
+    //article handler
+        
+    if (index === null) {
+        fetch(
+            'https://en.wikipedia.org/api/rest_v1/page/summary/'
+            + searchTerm)
+            .then(function (response) {
+                return response.json();
+            })
+            .then(function (data) {
+                // Create a variable that will select the <div> where the article will be displayed
+                var articleContainerEl = document.querySelector('#article-response-container');
+                // Create a variable that will select the <div> where the article TITLE will be displayed
+                var articleTitleEl = document.querySelector('#article-title');
+                // empty out both divs before we append them
+                articleContainerEl.innerHTML = '';
+                articleTitleEl.innerHTML = '';
+    
+                var searchArticle = document.createElement('article');
+                var articleTitle = document.createElement('h3');
+                var articleLink = document.createElement('a');
+    
+                articleTitle.setAttribute('id', 'article-card-title');
+                articleLink.setAttribute('href', "https://en.wikipedia.org/wiki/" + searchTerm);
+    
+                searchArticle.innerHTML = (data.extract);
+                articleTitle.innerHTML = (data.displaytitle);
+                articleLink.innerHTML = ("Read more...");
+                articleLink.setAttribute('target', '_blank');
+    
+                articleContainerEl.appendChild(searchArticle);
+                articleTitleEl.appendChild(articleTitle);
+                articleContainerEl.appendChild(articleLink);
+            });
+    }
+
+    //if an index is present it will run the random function
+
+    else {
+        var randomSearch = astronomyGlossary[index].name;
+        var randomArticle = astronomyGlossary[index];
+        fetch(
+            'https://en.wikipedia.org/api/rest_v1/page/summary/'
+            + randomSearch)
+            .then(function(response) {
+              return response.json();
+            })
+            .then(function(response) {
+                if (!response.extract){
+                    $('#article-response-container').text(randomArticle.definition)
+                    $('#article-card-title').text(randomSearch);
+                }
+                else {
+                    var readMoreLink = $("<a>")
+                    readMoreLink.attr('href', "https://en.wikipedia.org/wiki/" + randomSearch)
+                    readMoreLink.attr('target', '_blank')
+                    readMoreLink.text("Read more...")
+                    $('#article-card-title').text(randomSearch);
+                    $('#article-response-container').text(response.extract + "\n ")
+                    $('#article-response-container').append("<br>")
+                    $('#article-response-container').append(readMoreLink);
+                }
+            });
+    }
+
+    videoUpdate(searchTerm);
 }
 var videoUpdate = function (searchTerm) {
         fetch("https://www.googleapis.com/youtube/v3/search?part=snippet&maxResults=25&q=astronomy,"
@@ -383,8 +475,7 @@ $(".list-group").on("click", "li", function () {
     var searchTerm = $(this)
       .text()
       .trim();
-    isListSearch = true;
-    imgUpdate(searchTerm);
+    listSearch(searchTerm);
   });
 
 
