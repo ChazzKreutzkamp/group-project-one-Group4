@@ -260,7 +260,7 @@ function imgUpdate(searchTerm) {
 var randomArticleUpdate = function(randomSearch, randomArticle) {
     fetch(
         'https://en.wikipedia.org/api/rest_v1/page/summary/'
-        + randomSearch)
+        + randomSearch.toLowerCase())
         .then(function(response) {
           return response.json();
         })
@@ -290,7 +290,7 @@ var randomArticleUpdate = function(randomSearch, randomArticle) {
 var articleUpdate = function (searchTerm) {
     fetch(
         'https://en.wikipedia.org/api/rest_v1/page/summary/'
-        + searchTerm)
+        + searchTerm.toLowerCase())
         .then(function (response) {
             return response.json();
         })
@@ -308,7 +308,7 @@ var articleUpdate = function (searchTerm) {
             var articleLink = document.createElement('a');
 
             articleTitle.setAttribute('id', 'article-card-title');
-            articleLink.setAttribute('href', "https://en.wikipedia.org/wiki/" + searchTerm);
+            articleLink.setAttribute('href', "https://en.wikipedia.org/wiki/" + searchTerm.toLowerCase());
 
             searchArticle.innerHTML = (data.extract);
             articleTitle.innerHTML = (data.displaytitle);
@@ -381,7 +381,7 @@ var listSearch = function (searchTerm) {
     if (index === null) {
         fetch(
             'https://en.wikipedia.org/api/rest_v1/page/summary/'
-            + searchTerm)
+            + searchTerm.toLowerCase())
             .then(function (response) {
                 return response.json();
             })
@@ -419,7 +419,7 @@ var listSearch = function (searchTerm) {
         var randomArticle = astronomyGlossary[index];
         fetch(
             'https://en.wikipedia.org/api/rest_v1/page/summary/'
-            + randomSearch)
+            + randomSearch.toLowerCase())
             .then(function(response) {
               return response.json();
             })
@@ -430,7 +430,7 @@ var listSearch = function (searchTerm) {
                 }
                 else {
                     var readMoreLink = $("<a>")
-                    readMoreLink.attr('href', "https://en.wikipedia.org/wiki/" + randomSearch)
+                    readMoreLink.attr('href', "https://en.wikipedia.org/wiki/" + randomSearch.toLowerCase())
                     readMoreLink.attr('target', '_blank')
                     readMoreLink.text("Read more...")
                     $('#article-card-title').text(randomSearch);
