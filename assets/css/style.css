@@ -12,6 +12,12 @@
 }
 body {
     background-color: var(--primary-color);
+    font-family: "Roboto Condensed", sans-serif;
+    font-size: 15px;
+}
+h1,
+h3 {
+    font-family: "Teko", 'Times New Roman', Times, serif;
 }
 header {
     padding: 20px 35px;
@@ -35,7 +41,7 @@ header {
 }
 .custom-header-text {
     color: var(--tertiary-color);
-    font-family: 'Times New Roman', Times, serif;
+    font-family: "Space Mono", 'Times New Roman', Times, serif;
 }
 .btn-custom {
     background-color: var(--primary-color);
