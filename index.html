@@ -1,11 +1,73 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/uikit@3.5.7/dist/css/uikit.min.css" />
+    <script src="https://cdn.jsdelivr.net/npm/uikit@3.5.7/dist/js/uikit.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/uikit@3.5.7/dist/js/uikit-icons.min.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Abril+Fatface&family=Bangers&family=Jockey+One&family=Roboto+Condensed&family=Space+Mono:wght@700&family=Teko:wght@500&display=swap" rel="stylesheet">
+    <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/open-iconic/1.1.1/font/css/open-iconic-bootstrap.min.css" />
+    <link rel="stylesheet" href="./assets/css/style.css">
+    <title>Space-Time Researcher</title>
 </head>
+
 <body>
-    
+    <Header id="apod-container">
+        <h1 class="custom-header-text">Space-Time Researcher</h1>
+        <button id="random" class="uk-button btn-custom btn-padding">Random Search</button>
+        <form class="form-items">
+            <input class="input-custom" type="text" id="searchTerm" placeholder="Specified Search">
+            <button id="search" class="uk-button btn-custom" type="submit" name="action"><span
+                    class="oi oi-magnifying-glass"></span></button>
+        </form>
+    </Header>
+    <section class="hero">
+        <div class="uk-card uk-card-small uk-card-default card-custom  custom-card-body-hero">
+            <div class="uk-card-header card-custom-header uk-text-center">
+                <h3 id="custom-card-title">Welcome to Space-Time Researcher</h3>
+            </div>
+            <div id="custom-card-body" class="uk-card-body">
+                <p id="card-body-initial-text">
+                    You can use this website to learn about the wonderful science of astronomy! Press the Random Search button to
+                    learn about a random astronomical subject like Starburst Galaxies. You can also search for specific astronomical
+                    terms like stars. Also, a note for parents out there, this site is safe for children to use.
+                </p>
+                <!-- without any of the previous text 10 list elements can be stored in the card body-->
+                <ul class="list-group" id="list-group"></ul>
+            </div>
+        </div>
+    </section>
+    <main>
+        <div class="uk-container uk-container-center container-height">
+            <div class="uk-grid">
+                <div class=" uk-width-1-1@m uk-width-1-2@l">
+                    <div id="response-img-container" class="content-margins content-small-margins">
+                        <img src="./assets/images/MilkyWayGalaxy.jpg" alt="space picture" id="response-img" />
+                    </div>
+                </div>
+                <div class="uk-width-1-1@m uk-width-1-2@l">
+                    <div class="uk-card uk-card-small uk-card-default custom-card-body-main content-margins">
+                        <div id="article-title" class="uk-card-header card-custom-header uk-text-center">
+                            <h3 id="article-card-title">Milky Way Galaxy</h3>
+                        </div>
+                        <div class="uk-card-body card-body-height" id="article-response-container"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div id="video">
+            <iframe id="searchVideo" src="https://www.youtube.com/embed/vl6jn-DdafM?ref=0" frameborder="0" allow="accelerometer; autoplay; 
+                encrypted-media; gyroscope; picture-in-picture">
+            </iframe>
+        </div>
+    </main>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.27.0/moment.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="assets/js/indexJava.js"></script>
 </body>
+
 </html>
