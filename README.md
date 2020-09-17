@@ -15,9 +15,9 @@
     <br />
     <a href="https://ChazzKreutzkamp.github.io/group-project-one-Group4/">View Demo</a>
     ·
-    <a href="https://github.com/ChazzKreutzkamp/group-project-one-Group4/tree/issues">Report Bug</a>
+    <a href="https://github.com/ChazzKreutzkamp/group-project-one-Group4/issues">Report Bug</a>
     ·
-    <a href="https://github.com/ChazzKreutzkamp/group-project-one-Group4/tree/issues">Request Feature</a>
+    <a href="https://github.com/ChazzKreutzkamp/group-project-one-Group4/issues">Request Feature</a>
   </p>
 </p>
 
@@ -37,7 +37,7 @@
 ## About The Project
 
 <a href="https://ChazzKreutzkamp.github.io/group-project-one-Group4/" rel="nofollow" >
-    <img src="./assets/images/ScreenShotMVP.JPG" alt="Weather Dashboard" width="100%" height="100%">
+    <img src="./assets/images/ScreenShotMVP.JPG" alt="Space-Time Researcher" width="100%" height="100%">
 </a>
 
 Ignite a love of learning, science, and astronomy while your kids are still young! Utilize our web application to allow your students to learn all about space and astronomy in a safe environment. 
@@ -67,9 +67,9 @@ A list of commonly used resources that I find helpful are listed in the acknowle
 <!-- GETTING STARTED -->
 ## Getting Started
 
-To get started simply enter the zip code for the city you wish to view the weather in. 
+To get started simply enter the search term of what you want to learn about or have us suggest something by clicking "Random Search". 
 
 <!-- ROADMAP -->
 ## Roadmap
 
-See the [open issues](https://github.com/heather-everton/Weather-Dashboard/issues) for a list of proposed features (and known issues).
+See the [open issues](https://github.com/ChazzKreutzkamp/group-project-one-Group4/issues) for a list of proposed features (and known issues).
