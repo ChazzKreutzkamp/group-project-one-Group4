@@ -5,7 +5,7 @@
     <img src="./assets/images/logo.jpg" alt="Logo" width="30%" height="30%">
   </a>
 
-  <h3 align="center">JavaScript Quiiz</h3>
+  <h3 align="center">Space-Time Researcher</h3>
 
   <p align="center">
     An awesome Space-Time Researcher to help your students learn all about space!
